@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Fixtures World Cup 2022 - Qatar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{/css/main.css}" rel="stylesheet"/>
+  <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+</head>
+<body>
+<div id="fixture-table">
+  <div id="fixture-table-caption">
+    Fixtures World Cup 2022
+  </div>
+  <div id="fixture-table-header">
+    <div class="table-header-cell">
+      Home
+    </div>
+    <div class="table-header-cell">
+      Away
+    </div>
+    <div class="table-header-cell">
+      Venue
+    </div>
+    <div class="table-header-cell">
+      Date
+    </div>
+    <div class="table-header-cell">
+      Time
+    </div>
+    <div class="table-header-cell">
+      Score
+    </div>
+  </div>
+  <div id="fixture-table-body" th:each="match: ${allFixtures.matchesList}">
+
+    <div class="table-body-cell">
+      <span><img class="logo" th:src="${match.homeTeamLogo}" /></span><span th:text="${match.homeTeamName}"/>
+      </div>
+    <div class="table-body-cell">
+    <span><img class="logo" th:src="${match.awayTeamLogo}" /></span><span th:text="${match.awayTeamName}"/>
+    </div>
+    <div class="table-body-cell" th:text="${match.venueName}"/>
+    <div class="table-body-cell" th:text="${match.startDate}"/>
+    <div class="table-body-cell" th:text="${match.startTime}"/>
+    <div class="table-body-cell" th:text="${match.matchScore}"/>
+  </div>
+
+</div>
+
+</body>
+</html>
