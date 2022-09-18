@@ -3,6 +3,7 @@ package com.wvoort.wc2022.fixtureservice.service;
 import com.wvoort.wc2022.fixtureservice.model.Matches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Service
 public class FixtureServiceImpl implements FixtureService {
+
+    private final static String MATCHES_CACHE_KEY="matches";
 
     @Value("${football.api.base}")
     private String footballApi;
@@ -32,12 +35,17 @@ public class FixtureServiceImpl implements FixtureService {
     }
 
 
-    @Override
-    public Matches getFixtures() {
 
+    @Cacheable(value = "matchesCache")
+    private String getRawFixtures(String matchesName) {
         final ResponseEntity<String> responseEntity =
                 restTemplate.getForEntity(footballApi + "fixtures"+ parameterString , String.class);
-        return Matches.fromJsonResponseString(responseEntity.getBody());
+        return responseEntity.getBody();
     }
 
+
+    @Override
+    public Matches getFixtures() {
+        return Matches.fromJsonResponseString(getRawFixtures(MATCHES_CACHE_KEY));
+    }
 }
