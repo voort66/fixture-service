@@ -12,7 +12,7 @@ public class FixtureController {
     @Autowired
     private FixtureService fixtureService;
 
-    @GetMapping("/fixtures")
+    @GetMapping(value = "/fixtures")
     public Matches getFixtures() {
         return fixtureService.getFixtures();
     }

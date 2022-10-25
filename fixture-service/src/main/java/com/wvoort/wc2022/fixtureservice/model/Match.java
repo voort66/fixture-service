@@ -1,5 +1,6 @@
 package com.wvoort.wc2022.fixtureservice.model;
 
+import com.google.gson.annotations.Expose;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
@@ -12,14 +13,21 @@ public class Match {
 
     private League league;
 
+    @Setter
     private Teams teams;
 
+    @Setter
     private Goals goals;
 
+    @Setter
     private Score score;
 
     public String getHomeTeamName() {
         return teams.getHome().getName();
+    }
+
+    public Long getMatchId() {
+        return fixture.getId();
     }
 
     public String getAwayTeamName() {
@@ -53,8 +61,5 @@ public class Match {
     public String getAwayTeamLogo() {
         return teams.getAway().getLogo();
     }
-
-
-
 
 }
