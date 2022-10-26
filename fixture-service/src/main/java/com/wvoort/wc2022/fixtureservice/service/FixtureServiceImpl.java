@@ -16,36 +16,52 @@ import java.util.List;
 @Service
 public class FixtureServiceImpl implements FixtureService {
 
-    private final static String MATCHES_CACHE_KEY="matches";
+    private static final String FIXTURES_ENDPOINT_BASE="fixtures";
 
     @Value("${football.api.base}")
     private String footballApi;
 
+    @Value("${api.header.key}")
+    private String apiHeaderKeyName;
+
+    @Value("${api.header.key.value}")
+    private String apiHeaderKeyValue;
+
+    @Value("${api.header.host}")
+    private String apiHeaderHostName;
+
+    @Value("${api.header.host.value}")
+    private String apiHeaderHostValue;
+
+    @Value("${api.parameters}")
+    private String parameterString;
+
     @Autowired
     private RestTemplate restTemplate;
 
-    private String parameterString = "?league=1&season=2022";
+
 
     @PostConstruct
     public void initRestTemplateInterceptors() {
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add(new HeaderInterceptor("x-apisports-key", "c4dfa1a2ba730fe8845f3aa2404f8490"));
-        interceptors.add(new HeaderInterceptor("x-rapidapi-host", "v3.football.api-sports.io"));
+        interceptors.add(new HeaderInterceptor(apiHeaderKeyName, apiHeaderKeyValue));
+        interceptors.add(new HeaderInterceptor(apiHeaderHostName, apiHeaderHostValue));
         restTemplate.setInterceptors(interceptors);
     }
 
 
 
-    @Cacheable(value = "matchesCache")
-    private String getRawFixtures(String matchesName) {
+
+    private String getRawFixtures() {
         final ResponseEntity<String> responseEntity =
-                restTemplate.getForEntity(footballApi + "fixtures"+ parameterString , String.class);
+                restTemplate.getForEntity(footballApi + FIXTURES_ENDPOINT_BASE + parameterString , String.class);
         return responseEntity.getBody();
     }
 
 
+    @Cacheable(value = "fixtures")
     @Override
     public Matches getFixtures() {
-        return Matches.fromJsonResponseString(getRawFixtures(MATCHES_CACHE_KEY));
+        return Matches.fromJsonResponseString(getRawFixtures());
     }
 }

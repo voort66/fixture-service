@@ -2,8 +2,10 @@ package com.wvoort.wc2022.fixtureservice.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class League {
+public class League implements Serializable {
     /**
      * "league": {
      *                 "id": 1,

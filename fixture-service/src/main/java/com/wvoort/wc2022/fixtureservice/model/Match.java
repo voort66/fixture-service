@@ -4,9 +4,11 @@ import com.google.gson.annotations.Expose;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 
 @EqualsAndHashCode
-public class Match {
+public class Match implements Serializable {
 
     @Setter
     private Fixture fixture;

@@ -2,6 +2,7 @@ package com.wvoort.wc2022.fixtureservice.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -9,7 +10,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Data
-public class Fixture {
+public class Fixture implements Serializable {
     private Long id;
 
     private String referee;

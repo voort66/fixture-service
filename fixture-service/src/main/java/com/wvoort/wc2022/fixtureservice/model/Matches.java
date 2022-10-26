@@ -8,11 +8,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.*;
 
 
 @EqualsAndHashCode
-public class Matches {
+public class Matches implements Serializable {
 
 
     private List<Match> matchesList = new ArrayList<>();
