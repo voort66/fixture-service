@@ -3,6 +3,9 @@ package com.wvoort.wc2022.fixtureservice.model;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MatchTest {
@@ -84,6 +87,17 @@ class MatchTest {
         assertNotNull(match);
 
 
+    }
+
+    @Test
+    void isTodayTest() {
+        Match match = new Gson().fromJson(MATCH_JSON, Match.class);
+        LocalDate localDate = LocalDate.parse("2022-11-21");
+        assertNotNull(localDate);
+        System.out.println(LocalDate.now());
+
+
+        assertFalse(match.isToday());
     }
 
 }

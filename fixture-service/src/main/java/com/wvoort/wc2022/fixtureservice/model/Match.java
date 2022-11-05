@@ -5,10 +5,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @EqualsAndHashCode
-public class Match implements Serializable {
+public class Match implements Serializable, Comparable<Match> {
 
     @Setter
     private Fixture fixture;
@@ -64,4 +65,21 @@ public class Match implements Serializable {
         return teams.getAway().getLogo();
     }
 
+    public String getRound() {
+        return league.getRound();
+    }
+
+    boolean isToday() {
+        return LocalDate.now().isEqual(LocalDate.parse(getStartDate()));
+    }
+
+    @Override
+    public int compareTo(Match match) {
+        if(this.getStartDate().compareTo(match.getStartDate()) != 0) {
+            return this.getStartDate().compareTo(match.getStartDate());
+        }
+
+        return this.getStartTime().compareTo(match.getStartTime());
+
+    }
 }

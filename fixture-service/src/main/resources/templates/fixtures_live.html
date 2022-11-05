@@ -13,15 +13,13 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-  <h1>Fixtures World Cup 2022 Qatar</h1>
+  <h1>Fixtures Now World Cup 2022 </h1>
 </div>
 
 <table class="table table-striped">
   <thead>
     <th>Home</th>
     <th>Away</th>
-    <th>Date and Time</th>
-    <th>Round</th>
     <th>Score</th>
   </thead>
   <tbody>
@@ -32,8 +30,6 @@
       <td>
         <span><img class="logo" th:src="${match.awayTeamLogo}" /></span><span th:text="${match.awayTeamName}"/>
       </td>
-      <td th:text="${match.startDate + ' ' +  match.startTime}" />
-      <td th:text="${match.round}"/>
       <td th:text="${match.matchScore}"/>
 
 

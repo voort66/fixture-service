@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @EqualsAndHashCode
@@ -37,8 +38,13 @@ public class Matches implements Serializable {
     }
 
     public List<Match> getMatchesList() {
-        return Collections.unmodifiableList(matchesList);
+        return Collections.unmodifiableList(matchesList).stream().sorted().collect(Collectors.toList());
     }
+
+    public List<Match> matchesToday() {
+        return Collections.unmodifiableList(matchesList).stream().filter(Match::isToday).sorted().collect(Collectors.toList());
+    }
+
 
 
 }

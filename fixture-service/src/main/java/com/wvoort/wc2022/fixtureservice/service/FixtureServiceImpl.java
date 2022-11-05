@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class FixtureServiceImpl implements FixtureService {
 
-    private static final String FIXTURES_ENDPOINT_BASE="fixtures";
+    private static final String FIXTURES_ENDPOINT_BASE = "fixtures";
 
     @Value("${football.api.base}")
     private String footballApi;
@@ -40,7 +40,6 @@ public class FixtureServiceImpl implements FixtureService {
     private RestTemplate restTemplate;
 
 
-
     @PostConstruct
     public void initRestTemplateInterceptors() {
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
@@ -50,11 +49,9 @@ public class FixtureServiceImpl implements FixtureService {
     }
 
 
-
-
-    private String getRawFixtures() {
+    private String getRawFixtures(String addOnParameters) {
         final ResponseEntity<String> responseEntity =
-                restTemplate.getForEntity(footballApi + FIXTURES_ENDPOINT_BASE + parameterString , String.class);
+                restTemplate.getForEntity(footballApi + FIXTURES_ENDPOINT_BASE + parameterString + addOnParameters, String.class);
         return responseEntity.getBody();
     }
 
@@ -62,6 +59,12 @@ public class FixtureServiceImpl implements FixtureService {
     @Cacheable(value = "fixtures")
     @Override
     public Matches getFixtures() {
-        return Matches.fromJsonResponseString(getRawFixtures());
+        return Matches.fromJsonResponseString(getRawFixtures(""));
+    }
+
+    @Override
+    public Matches getLiveFixtures() {
+
+        return Matches.fromJsonResponseString(getRawFixtures("&live=all"));
     }
 }

@@ -43,7 +43,7 @@ class FixtureWebControllerTest {
 
     @Test
     void testGetFixtures() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/fixtures/overview"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/fixtures/view"))
                 .andExpect(status().isOk())
                 .andReturn();
 

@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-  <h1>Fixtures World Cup 2022 Qatar</h1>
+  <h1>Fixtures Today World Cup 2022 </h1>
 </div>
 
 <table class="table table-striped">
@@ -25,7 +25,7 @@
     <th>Score</th>
   </thead>
   <tbody>
-    <tr  th:each="match: ${allFixtures.matchesList}">
+    <tr  th:each="match: ${allFixtures.matchesToday}">
       <td>
         <span><img class="logo" th:src="${match.homeTeamLogo}" /></span><span th:text="${match.homeTeamName}"/>
       </td>
