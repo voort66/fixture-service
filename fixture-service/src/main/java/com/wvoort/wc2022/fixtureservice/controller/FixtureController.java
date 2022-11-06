@@ -17,6 +17,14 @@ public class FixtureController {
         return fixtureService.getFixtures();
     }
 
+    @GetMapping(value = "/fixtures/today")
+    public Matches getFixturesToday() {
+        return fixtureService.getFixturesToday();
+    }
 
+    @GetMapping(value = "/fixtures/live")
+    public Matches getFixturesLive() {
+        return fixtureService.getLiveFixtures();
+    }
 
 }

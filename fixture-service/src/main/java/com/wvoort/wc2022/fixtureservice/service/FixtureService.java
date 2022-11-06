@@ -7,4 +7,6 @@ public interface FixtureService {
 
     Matches getLiveFixtures();
 
+    Matches getFixturesToday();
+
 }

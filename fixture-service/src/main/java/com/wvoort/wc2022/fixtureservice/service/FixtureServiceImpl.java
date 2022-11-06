@@ -63,6 +63,11 @@ public class FixtureServiceImpl implements FixtureService {
     }
 
     @Override
+    public Matches getFixturesToday() {
+        return getFixtures().matchesToday();
+    }
+
+    @Override
     public Matches getLiveFixtures() {
 
         return Matches.fromJsonResponseString(getRawFixtures("&live=all"));

@@ -26,7 +26,7 @@ public class FixutreWebController {
     @GetMapping(value = "/fixtures/view/today")
     public String displayGamesToday(final Model model) {
         log.info("Getting todays games from repository");
-        model.addAttribute("allFixtures", fixtureService.getFixtures() );
+        model.addAttribute("allFixtures", fixtureService.getFixturesToday() );
 
         return "fixtures_today";
 
