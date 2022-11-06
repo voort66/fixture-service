@@ -31,7 +31,7 @@ public class CacheConfig {
     }
 
     @CacheEvict(allEntries = true, value = {FIXTURES})
-    @Scheduled(fixedDelay = Timer.ONE_MINUTE * 15)
+    @Scheduled(fixedDelay = Timer.ONE_HOUR)
     public void reportCacheEvict() {
         log.info("Fixtures cache flushed at {}", Instant.now());
     }
