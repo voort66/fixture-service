@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Predictions Edit</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+<div class="jumbotron text-center">
+    <h1 th:text="${user}"/>
+    <p>Predictions for World Cup 2022 Qatar</p>
+</div>
+<form action="#" th:action="@{/predictions/save}" th:object="${predictionDto}" method="post">
+
+    <fieldset>
+        <div class="text-center mb-4">
+            <input type="submit" class="btn btn-success" th:value="Save"/>
+            <input type="reset" class="btn btn-default" name="reset" th:value="Reset"/>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Home</th>
+                    <th/>
+                    <th scope="col">Away</th>
+                    <th/>
+                    <th scope="col">Date and Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prediction, itemStat : *{predictions}">
+                    <td>
+                        <input type="hidden" th:value="${prediction.matchId}"
+                               th:attr="name='predictions[__${itemStat.index}__].matchId'"/>
+                        <input type="hidden" th:value="${prediction.userName}"
+                               th:attr="name='predictions[__${itemStat.index}__].userName'"/>
+                        <span>
+                        <img class="logo" th:src="*{predictions[__${itemStat.index}__].matchDetails.homeTeamLogo}"/>
+                      </span>
+                        <span th:text="*{predictions[__${itemStat.index}__].matchDetails.homeTeamName}"/>
+
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" th:id="@{|#home-${itemStat.index}|}"
+                               pattern="[0-9]{1}" th:field="*{predictions[__${itemStat.index}__].homeGoals}"
+                               title="score should be between 0 and 9">
+
+                    </td>
+                    <td>
+                       <span>
+                        <img class="logo" th:src="*{predictions[__${itemStat.index}__].matchDetails.awayTeamLogo}"/>
+                      </span>
+                        <span th:text="*{predictions[__${itemStat.index}__].matchDetails.awayTeamName}"/>
+
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" th:id="@{|#away-${itemStat.index}|}"
+                               th:field="*{predictions[__${itemStat.index}__].awayGoals}" pattern="[0-9]{1}"/>
+
+                    </td>
+                    <td>
+                        <span th:text="*{predictions[__${itemStat.index}__].matchDetails.startDate}"/>
+                        <span th:text="*{predictions[__${itemStat.index}__].matchDetails.startTime}"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </fieldset>
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
+        </ul>
+    </div>
+</form>
+</div>
+</body>
+</html>

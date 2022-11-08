@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+    <head>
+        <title>Standings</title>
+
+    </head>
+    <body>
+    <div layout:fragment="content">
+        <div class="jumbotron text-center">
+            <h1>Standings</h1>
+            <p>World Cup 2022 Qatar</p>
+        </div>
+
+        <div  th:each="group: ${standings.groups}">
+            <div class="group-table-caption">
+                <h3 th:text="${group.groupName}"/>
+            </div>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <th scope="col">Rank</th>
+                <th scope="col">Team</th>
+                <th scope="col">Played</th>
+                <th scope="col">Pts</th>
+                <th scope="col">W</th>
+                <th scope="col">L</th>
+                <th scope="col">D</th>
+                <th scope="col">GD</th>
+                </thead>
+                <tbody>
+                    <tr th:each="teamResult: ${group.teamResults}">
+                        <th scope="row" th:text="${teamResult.rank}"/>
+                        <td>
+                            <span><img class="logo" th:src="${teamResult.team.logo}"/></span>
+                            <span th:text="${teamResult.team.name}"/>
+                        </td>
+                        <td th:text="${teamResult.played}"/>
+                        <td th:text="${teamResult.points}"/>
+                        <td th:text="${teamResult.win}"/>
+                        <td th:text="${teamResult.lose}"/>
+                        <td th:text="${teamResult.draw}"/>
+                        <td th:text="${teamResult.goalsDiff}"/>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </body>
+</html>

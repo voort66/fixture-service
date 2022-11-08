@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Live Fixtures</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+<div class="jumbotron text-center">
+  <h1>On Now</h1>
+  <p>World Cup 2022 Qatar</p>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th>Home</th>
+    <th>Away</th>
+    <th>Score</th>
+  </thead>
+  <tbody>
+    <tr  th:each="match: ${allFixtures.matchesList}">
+      <td>
+        <span><img class="logo" th:src="${match.homeTeamLogo}" /></span><span th:text="${match.homeTeamName}"/>
+      </td>
+      <td>
+        <span><img class="logo" th:src="${match.awayTeamLogo}" /></span><span th:text="${match.awayTeamName}"/>
+      </td>
+      <td th:text="${match.matchScore}"/>
+
+
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+</body>
+</html>

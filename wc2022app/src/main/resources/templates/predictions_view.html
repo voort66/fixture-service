@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Predictions View</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="jumbotron text-center">
+        <h1 th:text="${user}"/>
+        <p>Predictions for World Cup 2022 Qatar</p>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Home</th>
+                <th/>
+                <th scope="col">Away</th>
+                <th/>
+                <th scope="col">Date and Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prediction : ${predictionDto.predictions}">
+                <td>
+                        <span>
+                        <img class="logo" th:src="${prediction.matchDetails.homeTeamLogo}"/>
+                      </span>
+                    <span th:text="${prediction.matchDetails.homeTeamName}"/>
+
+                </td>
+                <td>
+                    <span th:text="${prediction.homeGoals}"/>
+                </td>
+                <td>
+                       <span>
+                        <img class="logo" th:src="${prediction.matchDetails.awayTeamLogo}"/>
+                      </span>
+                    <span th:text="${prediction.matchDetails.awayTeamName}"/>
+
+                </td>
+                <td>
+                    <span th:text="${prediction.awayGoals}"/>
+
+
+                </td>
+                <td>
+                    <span th:text="${prediction.matchDetails.startDate}"/>
+                    <span th:text="${prediction.matchDetails.startTime}"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

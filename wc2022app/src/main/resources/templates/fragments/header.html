@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" th:classappend="${module == 'home'} ? 'active' : ''">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Fixtures
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/fixtures}" th:classappend="${module == 'fixtures'} ? 'active' : ''">All</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/fixtures/live}" th:classappend="${module == 'fixtures-live'} ? 'active' : ''">Live</a>
+                        <a class="dropdown-item" th:href="@{/fixtures/today}" th:classappend="${module == 'fixtures-today'} ? 'active' : ''">Today</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Predictions
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/predictions/editable}" th:classappend="${module == 'predictions-edit'} ? 'active' : ''">Edit</a>
+                        <a class="dropdown-item" th:href="@{/predictions/all}" th:classappend="${module == 'predictions-all'} ? 'active' : ''">View</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/standings}" th:classappend="${module == 'standings'} ? 'active' : ''">Standings</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
