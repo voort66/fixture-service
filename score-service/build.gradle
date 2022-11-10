@@ -1,0 +1,52 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.google.cloud.tools.jib' version '3.3.1'
+	id 'java'
+}
+
+group = 'com.wvoort.wc2022'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'com.google.code.gson:gson:2.10'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
+
+
+    compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+jib {
+	to {
+		image docker_image
+		auth {
+			username  docker_user
+			password  docker_password
+		}
+		tags = [version, 'latest']
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
